@@ -37,12 +37,18 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.counterService.isAuth = false;
+    this.counterService.date = '';
     this.message = '';
     const userName = this.username?.value;
     const password = this.password?.value;
     this.subscription = this.counterService.login(userName, password)
       .subscribe(
-        data => this.router.navigate(['session'], { queryParams: { date: data.date } }),
+        data => {
+          this.counterService.isAuth = true;
+          this.counterService.date = data.date;
+          this.router.navigate(['session']);
+        },
         err => {
           console.error(err);
           this.message = 'User not found. Try again';

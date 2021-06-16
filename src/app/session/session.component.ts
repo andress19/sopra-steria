@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { interval, Subscription } from 'rxjs';
+import { CounterService } from '../services/counter.service';
 
 @Component({
   selector: 'app-session',
@@ -16,7 +17,7 @@ export class SessionComponent implements OnInit, OnDestroy {
     seconds: 0
   };
   lastSession = '';
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private router: Router, private counterService: CounterService) { }
 
   ngOnDestroy(): void {
     if (this.subscription) {
@@ -25,7 +26,7 @@ export class SessionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(data => this.lastSession = data.date);
+    this.lastSession = this.counterService.date;
     this.subscription = interval(1000)
     .subscribe(x => { this.formatDate(this.lastSession); });
   }
@@ -40,6 +41,7 @@ export class SessionComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
+    this.counterService.isAuth = false;
     this.router.navigate(['']);
   }
 

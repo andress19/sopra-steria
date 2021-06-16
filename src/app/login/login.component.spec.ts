@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CounterServiceStub } from '../mocks';
 import { CounterService } from '../services/counter.service';
+import { SessionComponent } from '../session/session.component';
 
 import { LoginComponent } from './login.component';
 
@@ -14,7 +15,9 @@ describe('LoginComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      imports: [HttpClientModule, RouterTestingModule],
+      imports: [HttpClientModule, RouterTestingModule.withRoutes(
+        [{path: 'session', component: SessionComponent}]
+      )],
       providers: [{provide: CounterService, useClass: CounterServiceStub}]
     })
     .compileComponents();
@@ -30,5 +33,12 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+
+  it('should login and set the date', () => {
+    component.onSubmit();
+    expect(counterService.date).toBe('01-01-1901');
+    expect(counterService.isAuth).toBeTrue();
   });
 });
