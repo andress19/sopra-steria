@@ -1,0 +1,21 @@
+<form novalidate (ngSubmit)="onSubmit()" [formGroup]="form">
+  <div class="container">
+    <span>
+      <p>
+        <img src="assets/candado.png" alt="" />
+      </p>
+      <p>
+        <input formControlName="username" type="text" placeholder="Username" />
+      </p>
+      <p>
+        <input formControlName="password" type="password" placeholder="Password" />
+      </p>
+      <p>
+        <button type="submit" [class]="username?.invalid || password?.invalid ? 'disabled' : ''" [disabled]="username?.invalid || password?.invalid">Log In</button>
+      </p>
+      <p>
+        <span class="error">{{message}}</span>
+      </p>
+    </span>
+  </div>
+</form>

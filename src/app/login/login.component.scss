@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  justify-content: center;
+
+  .disabled {
+    background-color: #2E3989;
+    opacity: 0.3;
+  }
+
+  .error {
+    color: red;
+    font-size: 2rem;
+  }
+
+  p {
+    margin: 2rem 0 2rem 0;
+    text-align: center;
+  }
+
+  button {
+    background-color: #2E3989;
+    color: #ffffff;
+  }
+
+  @media (max-width: 998px) {
+    .error {
+      color: red;
+      font-size: 1rem;
+    }
+    input {
+      border: none;
+      border-bottom: 1px solid gray;
+      width: 15rem;
+      height: 3rem;
+      font-size: 1.2rem;
+    }
+    button {
+      width: 15rem;
+      height: 2.8rem;
+      font-size: 1.2rem;
+    }
+    img {
+      width: 6rem;
+    }
+  }
+  @media (min-width: 999px) {
+    input {
+      border: none;
+      border-bottom: 1px solid gray;
+      width: 60rem;
+      height: 3rem;
+      font-size: 2rem;
+    }
+    button {
+      width: 60rem;
+      height: 4.5rem;
+      font-size: 2rem;
+    }
+    img {
+      width: 12rem;
+    }
+  }
+}
